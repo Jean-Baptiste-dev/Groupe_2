@@ -2,7 +2,7 @@ import React from "react";
 
 const About = (props) => {
 
-     return <h1>About</h1>;
+     return <h1>Aboutrrr</h1>;
 };
 
 export default About;
