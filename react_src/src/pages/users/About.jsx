@@ -2,7 +2,16 @@ import React from "react";
 
 const About = (props) => {
 
-     return <h1>Aboutrrr</h1>;
+     return (
+
+          <tre>
+     <center>
+          
+          <p>Ceci est jeu de rôle, qui vous permet de créer
+           vos personnage et des objets associés !</p> </center> 
+
+     </tre>
+     )
 };
 
 export default About;
