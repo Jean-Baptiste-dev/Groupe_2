@@ -1,4 +1,4 @@
 export function hasAuthenticated() {
 
-    return false;
+    return true;
 }

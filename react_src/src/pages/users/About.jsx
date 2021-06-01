@@ -6,9 +6,9 @@ const About = (props) => {
 
           <tre>
      <center>
-          
-          <p>Ceci est jeu de rôle, qui vous permet de créer
-           vos personnage et des objets associés !</p> </center> 
+          <br></br><br></br>
+          <p>Ceci est un  jeu de rôle, qui vous permet de créer
+            vos personnage et des objets associés !</p> </center> 
 
      </tre>
      )
