@@ -1,5 +1,5 @@
 export function removeItem(itemToRemove) {
-    window.localStorage.removeItem(itemToRemove);
+ return    window.localStorage.removeItem(itemToRemove);
 }
 export function getItem(item) {
     window.localStorage.getItem(item);

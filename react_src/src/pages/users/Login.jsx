@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Auth from "../../contexts/Auth";
+import { login } from "../../services/AuthApi";
 
 const Login = ({history}) => {
-     const { isAuthenticated } = useContext(Auth);
+     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
      const [user, setUser] = useState({
           identifiant: ""
      })
@@ -10,17 +11,23 @@ const Login = ({history}) => {
           const { name, value } = currentTarget;
           setUser({ ...user, [name]: value})
      }
-     const handleSubmit = event => {
+     const handleSubmit = async event => {
           event.preventDefault();
 
-          console.group();
-          console.log(user);
-          console.groupEnd();
+         try{
+              const response = await login(user);
+
+              setIsAuthenticated(response);
+             
+              history.replaceState('/profile');
+         }catch({ response }) {
+              console.log(response);
+         }
 
      }
      useEffect(()=> {
           if(isAuthenticated){
-          history.replaceState('/');
+          history.replaceState('/profile');
           }
      }, [history, isAuthenticated]);
 

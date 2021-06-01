@@ -2,12 +2,15 @@ import React from 'react';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../contexts/Auth';
+import { logout } from '../services/AuthApi';
 
 const Navbar = () =>{
-    const { isAuthenticated } = useContext(Auth);
+    const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
 
     const handleLogout = () =>{
-        console.log('on est deco');
+        logout();
+        setIsAuthenticated(false);
+
     }
 
     return (
@@ -47,12 +50,18 @@ const Navbar = () =>{
       ))  || (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item active ">
+        <NavLink className="nav-link"  to="/profile">  
+           Profil
+          </NavLink>
+        </li> 
+        <li className="nav-item active ">
           <button className="btn btn-danger"onClick={handleLogout} > 
            Deconnexion
           </button>
         </li> 
         
       </ul>
+    
       )}
     </div>
   </div>
