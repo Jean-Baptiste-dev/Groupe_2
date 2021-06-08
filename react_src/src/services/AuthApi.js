@@ -13,7 +13,7 @@ export function hasAuthenticated() {
 }
 export function login(credentials){
     return axios
-    .post('http://localhost:3000/#/login', credentials)
+    .post('http://localhost:3001/login', credentials)
     .then(response => response.data.token)
     .then(token => {
         addItem('projetmobileToken', token);

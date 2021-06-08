@@ -10,6 +10,7 @@ const Login = ({history}) => {
      const handleChange = ({currentTarget}) => {
           const { name, value } = currentTarget;
           setUser({ ...user, [name]: value})
+          console.log(value, name);
      }
      const handleSubmit = async event => {
           event.preventDefault();
@@ -36,10 +37,11 @@ const Login = ({history}) => {
           <form className="form-group" onSubmit={handleSubmit}>
                
           <h1>Se connecter</h1>
-          <label className="col-form-label mt-4" htmlfor="Identifiant">Identifiant</label>
+
+          <label className="col-form-label mt-4">Identifiant</label>
           <input type="text" className="form-control" placeholder="Entrer votre identifiant du jeu"
            id="identifiant" name="identifiant" onChange={handleChange}></input><br></br>
-          <button className="btn btn-primary">Se connecter</button>
+          <button className="btn btn-primary" type='submit'>Se connecter</button>
           </form>
               
 

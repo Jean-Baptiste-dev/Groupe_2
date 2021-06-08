@@ -2,39 +2,58 @@
 const express = require('express')
 const app = express()
 var router = express.Router();
-
+const cors=require('cors');
 let connect = require("./connection.js")
 let config = require("./config.js")
-const { Router } = require('express')
-var users =[
+//const { Router } = require('express')
+app.use(express.json())
+const corsOptions = {
+  origin: "http://localhost:3000",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
+};
 
-  {
-    identifiant: 'Jeanbaptistedev',
-  }
-]
+app.get('/jeu', async (req, res) => {
 
-app.get('/', function(req, res, next) {
+  let {db_client, db_connection} = await connect()
+  
+  db_connection.collection('jeu').find({}).toArray((err, result) => {
+    if(err) return console.log(err)
+
+    console.log('jeu :', result)
+
+    db_client.close()
+    res.send(result)
+   
+  })
+})
+
+
+app.use(cors(corsOptions));
+
+app.get('/', function(req, res) {
   res.send('Le coté backend du projet')
 
 })
 
-router.post('/login', function(req, res) {
-  let result = users.find(user => user.identifiant == req.body.identifiant);
-  if(result){
-    res.status(200).send({
-      message: "Vous êtes un ancien joueurs, ajouter ou managé vos personnages.."
-    })
-  }else{
-    res.status(200).send({
-      message: "Vous êtes un nouveau joueur! créez vos personnage et assignez leurs des objets!"
-  })
-}
+// Page de login et creation d'api
 
+app.post('/login', function(req, res) {
+  try {
+    const identifiant = req.body
+    const jeuR = await  db_connection.collection('jeu').insertOne(identifiant)
+    res.status(200).json(jeuR)
+} catch (err) {
+    console.log(err)
+    throw err
+}
+    
 })
-module.exports = router;
+
 
 
 app.listen(config.port, function () {
   console.log(`Example app listening on port ${config.port} !`)
 })
-

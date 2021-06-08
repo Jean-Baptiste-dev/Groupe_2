@@ -42,7 +42,7 @@ const Navbar = () =>{
            
         <li className="nav-item active ">
           <NavLink className="nav-link"  to="/login"> 
-           Connexionnnn
+           Me connecter
           </NavLink>
         </li> 
         
